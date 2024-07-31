@@ -38,8 +38,25 @@ function playRound(humanChoice, computerChoice) {
     return winner;
 }
 
-function playGame () {
-    for (let i = 0; i<5; i++) {
+const rock = document.querySelector("#rock");
+rock.addEventListener("click", () => {
+    let computerChoice = getComputerChoice();
+    playRound("rock", computerChoice);
+});
+
+const paper = document.querySelector("#paper");
+rock.addEventListener("click", () => {
+    let computerChoice = getComputerChoice();
+    playRound("paper", computerChoice);
+});
+
+const scissors = document.querySelector("#rock");
+rock.addEventListener("click", () => {
+    let computerChoice = getComputerChoice();
+    playRound("scissors", computerChoice);
+});
+
+/*function playGame () {
         const humanChoice = getHumanChoice();
         const computerChoice = getComputerChoice();
         let winner = playRound(humanChoice, computerChoice);
@@ -49,7 +66,7 @@ function playGame () {
             computerScore++;
         }
     console.log("Results\n" + "Human " + humanScore + " - " + computerScore + " NPC");
-    }
+    
     if (humanScore > computerScore) {
         console.log("You are the winner. Congratulations!!\nThe final score was:\n Human " + humanScore + " - " + computerScore);
     } else if(computerScore > humanScore) {
@@ -61,4 +78,4 @@ function playGame () {
 
 
 
-playGame();
+playGame();*/
