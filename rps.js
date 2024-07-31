@@ -22,44 +22,76 @@ function getHumanChoice () {
     return HC.toLowerCase();
 }
 
-function playRound(humanChoice, computerChoice) {
+function playGame(humanChoice, computerChoice) {
+    console.log(humanChoice);
     let winner = "";
     if (humanChoice == computerChoice) {
         console.log("No one Wins =(")
+        winner = "tie"
     } else {
         if ((humanChoice == "rock" && computerChoice == "scissors") || (humanChoice == "paper" && computerChoice == "rock") || (humanChoice == "scissors" && computerChoice == "paper")) {
             console.log("You win! " + humanChoice + " beats " + computerChoice + ".");
             winner = "human";
+            humanScore++;
         } else {
             console.log("You lost :( " + humanChoice + " is beaten by " + computerChoice + ". You suck.");
             winner = "computer";
+            computerScore++;
         }
     }
+    if (winner == "tie") {
+        results.textContent = "No one wins. There's a tie.\n" + "Human " + humanScore + " - " + computerScore + " IA";
+    } else if (winner == "human") {
+        results.textContent = "You win! " + humanChoice + " beats " + computerChoice + ".\n" + "Human " + humanScore + " - " + computerScore + " IA";
+    } else {
+        results.textContent = "You lost :( " + humanChoice + " is beaten by " + computerChoice + ". You suck.\n" + "Human " + humanScore + " - " + computerScore + " IA";
+    }
+    
+    if ((humanScore == 5) || (computerScore == 5)) {
+        results.textContent = "The game is over. The final result is: " + "Human " + humanScore + " - " + computerScore + " IA";
+        humanScore = 0;
+        computerScore = 0;
+    }
+
     return winner;
 }
 
+
+//Buttons functionality
 const rock = document.querySelector("#rock");
 rock.addEventListener("click", () => {
     let computerChoice = getComputerChoice();
-    playRound("rock", computerChoice);
+    playGame("rock", computerChoice);
 });
+rock.setAttribute("style", "margin: 10px");
 
 const paper = document.querySelector("#paper");
-rock.addEventListener("click", () => {
+paper.addEventListener("click", () => {
     let computerChoice = getComputerChoice();
-    playRound("paper", computerChoice);
+    playGame("paper", computerChoice);
 });
+paper.setAttribute("style", "margin: 10px");
 
-const scissors = document.querySelector("#rock");
-rock.addEventListener("click", () => {
+const scissors = document.querySelector("#scissors");
+scissors.addEventListener("click", () => {
     let computerChoice = getComputerChoice();
-    playRound("scissors", computerChoice);
+    playGame("scissors", computerChoice);
 });
+scissors.setAttribute("style", "margin: 10px");
 
+const body = document.querySelector("body")
+const results = document.createElement("div");
+results.classList.add("results");
+results.textContent = "";
+results.setAttribute("style", "margin: 10px");
+body.appendChild(results);
+
+
+//Old rounds system
 /*function playGame () {
         const humanChoice = getHumanChoice();
         const computerChoice = getComputerChoice();
-        let winner = playRound(humanChoice, computerChoice);
+        let winner = playGame(humanChoice, computerChoice);
         if (winner == "human") {
             humanScore++;
         } else if (winner == "computer") {
